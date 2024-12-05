@@ -99,7 +99,6 @@ get3DayWeatherWithFetch = async () => {
   return (
     <div className="App">
       <h1>App</h1>
-      <p>{`API KEY: ${process.env.REACT_APP_WEATHER_API_KEY}`}</p>
       {this.state.lon && this.state.lat &&
       <p>{`Lat: ${this.state.lat}, Lon: ${this.state.lon}`}</p>}
       {this.state.date && this.state.weather && this.state.temp &&
