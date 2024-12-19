@@ -1,6 +1,7 @@
 import React from "react";
 import './App.css';
 import axios from "axios";
+import developerNotes from "./developerNotes.json";
 
 class App extends React.Component {
  constructor(props) {
@@ -116,21 +117,34 @@ res.catch(error => {
 
 }
   
-
+getDocumentation = async () => {
+  let url = "http://localhost:5000";
+  try {
+    let res = await axios.get(`${url}/documentation`);
+    console.log(res);
+  } catch(error) {
+    console.log(error.message);
+  }
+}
 
 
   render() {
   return (
-    <div className="App">
-      <h1>App</h1>
-      {this.state.lon && this.state.lat &&
-      <p>{`Lat: ${this.state.lat}, Lon: ${this.state.lon}`}</p>}
-      {this.state.date && this.state.weather && this.state.temp &&
-      <p>{`${this.state.date} - Weather Outlook: ${this.state.weather}, Temp: ${this.state.temp} degrees.`}</p>}
-      {this.state.date2 && this.state.weather2 && this.state.temp2 &&
-      <p>{`${this.state.date2} - Weather Outlook: ${this.state.weather2}, Temp: ${this.state.temp2} degrees.`}</p>}
-      {this.state.date3 && this.state.weather3 && this.state.temp3 &&
-      <p>{`${this.state.date3} - Weather Outlook: ${this.state.weather3}, Temp: ${this.state.temp3} degrees.`}</p>}
+    <div>
+      <div className="App">
+        <h1>App</h1>
+        {this.state.lon && this.state.lat &&
+        <p>{`Lat: ${this.state.lat}, Lon: ${this.state.lon}`}</p>}
+        {this.state.date && this.state.weather && this.state.temp &&
+        <p>{`${this.state.date} - Weather Outlook: ${this.state.weather}, Temp: ${this.state.temp} degrees.`}</p>}
+        {this.state.date2 && this.state.weather2 && this.state.temp2 &&
+        <p>{`${this.state.date2} - Weather Outlook: ${this.state.weather2}, Temp: ${this.state.temp2} degrees.`}</p>}
+        {this.state.date3 && this.state.weather3 && this.state.temp3 &&
+        <p>{`${this.state.date3} - Weather Outlook: ${this.state.weather3}, Temp: ${this.state.temp3} degrees.`}</p>}
+      </div>
+      <div className="Documentation">
+        <button onClick={this.getDocumentation}>Get Documentation</button>
+      </div>
     </div>
   );
 }
