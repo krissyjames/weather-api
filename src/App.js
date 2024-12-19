@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css';
 import axios from "axios";
-import developerNotes from "./developerNotes.json";
+import DeveloperNotes from "./developerNotes";
 
 class App extends React.Component {
  constructor(props) {
@@ -17,8 +17,8 @@ class App extends React.Component {
     weather2: null,
     temp3: null,
     date3: null,
-    weather3: null
-
+    weather3: null,
+    developerNotes: []
   }
   }
  
@@ -121,7 +121,11 @@ getDocumentation = async () => {
   let url = "http://localhost:5000";
   try {
     let res = await axios.get(`${url}/documentation`);
-    console.log(res);
+    console.log(res.data);
+    this.setState({
+      developerNotes: res.data
+    })
+    console.log(this.state);
   } catch(error) {
     console.log(error.message);
   }
@@ -142,8 +146,14 @@ getDocumentation = async () => {
         {this.state.date3 && this.state.weather3 && this.state.temp3 &&
         <p>{`${this.state.date3} - Weather Outlook: ${this.state.weather3}, Temp: ${this.state.temp3} degrees.`}</p>}
       </div>
-      <div className="Documentation">
+      <div>
         <button onClick={this.getDocumentation}>Get Documentation</button>
+        {this.state.developerNotes.map((note, index) => (
+        <DeveloperNotes 
+          key={index} 
+          devNote={note}
+          />
+          ))}
       </div>
     </div>
   );
