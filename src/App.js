@@ -20,7 +20,7 @@ class App extends React.Component {
     date3: null,
     weather3: null,
     developerNotes: [],
-    storeProducts: {}
+    storeProducts: []
   }
   }
  
@@ -173,12 +173,12 @@ getProducts = async () => {
       </div>
       <div>
         <button onClick={this.getProducts}>Get Products</button>
-        {/* {this.state.storeProducts.map((products, index) => (
+        {this.state.storeProducts.map((products, index) => (
           <Products
           key={index}
           product={products}
-          /> */}
-        {/* ))} */}
+          />
+        ))}
       </div>
     </div>
   );
