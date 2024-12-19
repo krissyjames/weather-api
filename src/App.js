@@ -18,7 +18,8 @@ class App extends React.Component {
     temp3: null,
     date3: null,
     weather3: null,
-    developerNotes: []
+    developerNotes: [],
+    product: {}
   }
   }
  
@@ -131,6 +132,20 @@ getDocumentation = async () => {
   }
 }
 
+getProducts = async () => {
+  let url = "http://localhost:5000";
+  try {
+    let res = await axios.get(`${url}/products`);
+    console.log(res.data);
+    this.setState({
+      product: res.data
+    })
+    console.log(this.state);
+  } catch(error) {
+    console.log(error.message);
+  }
+}
+
 
   render() {
   return (
@@ -154,6 +169,9 @@ getDocumentation = async () => {
           devNote={note}
           />
           ))}
+      </div>
+      <div>
+        <button onClick={this.getProducts}>Get Products</button>
       </div>
     </div>
   );
