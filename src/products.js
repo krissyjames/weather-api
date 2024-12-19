@@ -6,7 +6,7 @@ function Products(props) {
         <div>
             <h2>{props.product.name}</h2>
             <p>{props.product.description}</p>
-            <p>{props.product.price}</p>
+            <p>${props.product.price}</p>
             <p>{props.product.companyName}</p>
         </div>
     )
