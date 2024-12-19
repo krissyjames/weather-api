@@ -2,6 +2,7 @@ import React from "react";
 import './App.css';
 import axios from "axios";
 import DeveloperNotes from "./developerNotes";
+import Products from "./products";
 
 class App extends React.Component {
  constructor(props) {
@@ -18,7 +19,8 @@ class App extends React.Component {
     temp3: null,
     date3: null,
     weather3: null,
-    developerNotes: []
+    developerNotes: [],
+    storeProducts: []
   }
   }
  
@@ -131,6 +133,20 @@ getDocumentation = async () => {
   }
 }
 
+getProducts = async () => {
+  let url = "http://localhost:5000";
+  try {
+    let res = await axios.get(`${url}/products`);
+    console.log(res.data);
+    this.setState({
+      storeProducts: res.data
+    })
+    console.log(this.state);
+  } catch(error) {
+    console.log(error.message);
+  }
+}
+
 
   render() {
   return (
@@ -154,6 +170,15 @@ getDocumentation = async () => {
           devNote={note}
           />
           ))}
+      </div>
+      <div>
+        <button onClick={this.getProducts}>Get Products</button>
+        {this.state.storeProducts.map((products, index) => (
+          <Products
+          key={index}
+          product={products}
+          />
+        ))}
       </div>
     </div>
   );
